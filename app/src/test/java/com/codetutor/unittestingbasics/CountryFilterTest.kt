@@ -32,24 +32,18 @@ class CountryFilterTest {
         countries = listOf<Country>()
     }
 
-
-
     @Test
     fun testFilterByDriveSide_left(){
-
         //Act
         val result = CountryFilter.filterByDriveSide(countries, "left")
-
         //Assert
         assertEquals(2,result.size)
     }
 
     @Test
     fun testFilterByDriveSide_eachEntryIsDriveByLeftSide(){
-
         //Act
         val result = CountryFilter.filterByDriveSide(countries, "left")
-
         //Assert
         assertTrue(result.all { it.driveSide == "left" })
     }
@@ -91,7 +85,6 @@ class CountryFilterTest {
         val exception = assertThrows(IllegalArgumentException::class.java){
             CountryFilter.filterByDriveSide(countries, "middle")
         }
-
         assertEquals("Invalid drive side: middle", exception.message)
     }
 
