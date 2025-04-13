@@ -7,7 +7,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.Assert.*
-
 @RunWith(Parameterized::class)
 class CountryFilterNullTests(
     private val driveSide: String,
@@ -38,6 +37,7 @@ class CountryFilterNullTests(
 
     @Test
     fun testNullScenarios() {
+        println("Running test: $testName")
         val result = CountryFilter.filterByDriveSide(countries, driveSide)
         if (shouldBeNull) {
             val nonmatching = result.find { it.driveSide != driveSide }

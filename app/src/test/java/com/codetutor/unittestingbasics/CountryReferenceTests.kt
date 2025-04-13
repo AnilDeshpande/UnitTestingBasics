@@ -24,6 +24,8 @@ class CountryReferenceTests(
 
     @Test
     fun testReferenceScenarios() {
+        println("Running test: ${testName}")
+
         val c1 = Country("India", "left")
         val c2 = if (shouldBeSame) c1 else Country("India", "left")
 
