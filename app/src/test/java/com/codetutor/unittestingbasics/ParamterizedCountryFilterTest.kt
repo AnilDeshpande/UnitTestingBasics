@@ -1,5 +1,7 @@
 package com.codetutor.unittestingbasics
 
+import com.codetutor.unittestingbasics.model.Country
+import com.codetutor.unittestingbasics.repository.CountryFilter
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

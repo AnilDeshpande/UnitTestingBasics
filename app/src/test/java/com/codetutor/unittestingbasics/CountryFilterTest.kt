@@ -1,18 +1,11 @@
 package com.codetutor.unittestingbasics
 
+import com.codetutor.unittestingbasics.model.Country
+import com.codetutor.unittestingbasics.repository.CountryFilter
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-
-data class Country(val name: String, val driveSide: String)
-
-object CountryFilter {
-    fun filterByDriveSide(countries: List<Country>, side: String): List<Country> {
-        require(side == "left" || side == "right") { "Invalid drive side: $side" }
-        return countries.filter { it.driveSide == side }
-    }
-}
 
 class CountryFilterTest {
 
