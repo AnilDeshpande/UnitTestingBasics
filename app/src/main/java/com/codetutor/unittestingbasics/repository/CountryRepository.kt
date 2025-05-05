@@ -8,6 +8,14 @@ class CountryRepository(
 
     suspend fun getAll(): List<Country> = dataSource.getAll()
 
-    suspend fun countriesBySide(side: String): List<Country> =
-        CountryFilter.filterByDriveSide(dataSource.getAll(), side)
+    /*suspend fun countriesBySide(side: String): List<Country> =
+        CountryFilter.filterByDriveSide(dataSource.getAll(), side)*/
+
+    suspend fun countriesBySide(side: String): List<Country> {
+        return try {
+            CountryFilter.filterByDriveSide(dataSource.getAll(), side)
+        } catch (e: IllegalArgumentException) {
+            emptyList()
+        }
+    }
 }
