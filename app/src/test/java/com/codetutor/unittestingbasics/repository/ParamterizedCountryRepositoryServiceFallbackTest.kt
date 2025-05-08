@@ -21,7 +21,12 @@ class ParamterizedCountryRepositoryServiceFallbackTest(
 
     private lateinit var repo: CountryRepository
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
+        when (dao) {
+            is StubCountryDAO -> (dao as StubCountryDAO).clear()
+            is FakeCountryDAO -> (dao as FakeCountryDAO).clear()
+        }
         repo = CountryRepository(dao, service)
     }
 
