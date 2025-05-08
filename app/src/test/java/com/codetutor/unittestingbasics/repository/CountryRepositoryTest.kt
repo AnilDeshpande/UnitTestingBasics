@@ -1,8 +1,9 @@
 package com.codetutor.unittestingbasics.repository
 
-import com.codetutor.unittestingbasics.doubles.FakeCountryDAO
-import com.codetutor.unittestingbasics.doubles.StubCountryDAO
+import com.codetutor.unittestingbasics.doubles.dao.FakeCountryDAO
+import com.codetutor.unittestingbasics.doubles.service.StubCountryService
 import com.codetutor.unittestingbasics.model.Country
+import com.codetutor.unittestingbasics.service.CountryService
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,6 +13,7 @@ class CountryRepositoryTest {
 
     private lateinit var countryDAO : CountryDAO
     private lateinit var repository: CountryRepository
+    private lateinit var countryService: CountryService
 
     @Before
     fun setup(){
@@ -23,7 +25,8 @@ class CountryRepositoryTest {
                 Country("UK", "left")
             )
         )
-        repository = CountryRepository(countryDAO)
+        countryService = StubCountryService()
+        repository = CountryRepository(countryDAO, countryService)
     }
 
     @Test
