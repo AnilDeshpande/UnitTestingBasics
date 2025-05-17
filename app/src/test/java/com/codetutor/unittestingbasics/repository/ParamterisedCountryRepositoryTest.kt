@@ -1,7 +1,9 @@
 package com.codetutor.unittestingbasics.repository
 
-import com.codetutor.unittestingbasics.doubles.FakeCountryDAO
+import com.codetutor.unittestingbasics.doubles.dao.FakeCountryDAO
+import com.codetutor.unittestingbasics.doubles.service.StubCountryService
 import com.codetutor.unittestingbasics.model.Country
+import com.codetutor.unittestingbasics.service.CountryService
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -18,6 +20,7 @@ class ParamterisedCountryRepositoryTest(
 
     private lateinit var repository: CountryRepository
     private lateinit var countryDAO: FakeCountryDAO
+    private lateinit var countryService: CountryService
 
     companion object {
         @JvmStatic
@@ -52,7 +55,8 @@ class ParamterisedCountryRepositoryTest(
                 Country("UK", "left")
             )
         )
-        repository = CountryRepository(countryDAO)
+        countryService = StubCountryService()
+        repository = CountryRepository(countryDAO, countryService)
     }
 
     @Test
