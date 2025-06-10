@@ -29,6 +29,10 @@ class CountryRepositoryTest {
         repository = CountryRepository(countryDAO, countryService)
     }
 
+    /**
+     * Tests the basic functionality of getAll() method to verify it correctly
+     * returns the full list of countries from the DAO.
+     */
     @Test
     fun testGetAll() = runBlocking {
         val countries = repository.getAll()
@@ -39,6 +43,10 @@ class CountryRepositoryTest {
         assert(countries[2].name == "UK")
     }
 
+    /**
+     * Tests that countriesBySide() correctly filters and returns only countries
+     * that drive on the left side of the road.
+     */
     @Test
     fun testGetAllLeft() = runBlocking {
         val countries = repository.countriesBySide("left")
@@ -48,6 +56,10 @@ class CountryRepositoryTest {
         assert(countries[1].name == "UK")
     }
 
+    /**
+     * Tests that countriesBySide() correctly filters and returns only countries
+     * that drive on the right side of the road.
+     */
     @Test
     fun testGetAllRight() = runBlocking {
         val countries = repository.countriesBySide("right")
@@ -56,12 +68,20 @@ class CountryRepositoryTest {
         assert(countries[0].name == "USA")
     }
 
+    /**
+     * Tests the error handling in countriesBySide() when an invalid drive side
+     * is provided. Should return an empty list.
+     */
     @Test
     fun testGetAllNonMatching() = runBlocking {
         val countries = repository.countriesBySide("non-matching")
         assert(countries.isEmpty())
     }
 
+    /**
+     * Tests filtering countries with "left" drive side to ensure the
+     * correct subset is returned. Validates filter behavior and data integrity.
+     */
     @Test
     fun testGetAllNull() = runBlocking {
         val countries = repository.countriesBySide("left")

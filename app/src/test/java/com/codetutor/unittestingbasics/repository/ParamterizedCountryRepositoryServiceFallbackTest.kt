@@ -13,6 +13,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
+/**
+ * Parameterized test that runs the same repository tests with different combinations of
+ * DAO and Service implementations to verify consistent behavior across implementations.
+ */
 @RunWith(Parameterized::class)
 class ParamterizedCountryRepositoryServiceFallbackTest(
     private val dao: CountryDAO,
@@ -38,6 +42,10 @@ class ParamterizedCountryRepositoryServiceFallbackTest(
         repo = CountryRepository(dao, service)
     }
 
+    /**
+     * Tests that when the local DAO is empty, the repository fetches data from the remote service
+     * and caches it. Skips this test for ThrowingServiceStub to avoid test failures.
+     */
     @Test fun `empty DAO triggers remote fetch & caches result`() = runBlocking {
         if (service is ThrowingServiceStub) return@runBlocking // Skip for ThrowingServiceStub
         val result = repo.getAll()
@@ -45,12 +53,21 @@ class ParamterizedCountryRepositoryServiceFallbackTest(
         Assert.assertEquals(2, dao.getAll().size)
     }
 
+    /**
+     * Tests that when the local DAO has data, the repository returns it without calling the remote
+     * service. This behavior should be consistent across all DAO and Service implementations.
+     */
     @Test fun `non-empty DAO skips service`() = runBlocking {
         dao.insertAll(listOf(Country("India", "left"))) // Warm cache
         val result = repo.getAll()
         Assert.assertEquals(1, result.size)
     }
 
+    /**
+     * Tests that when the remote service throws an exception, the repository gracefully falls back
+     * to using the local DAO data. This test is relevant for all combinations, but particularly
+     * important for implementations with ThrowingServiceStub.
+     */
     @Test fun `service failure falls back to DAO`() = runBlocking {
         dao.insertAll(listOf(Country("India", "left"))) // Prepopulate DAO
         val result = repo.getAll() // Should fall back to DAO
@@ -59,6 +76,13 @@ class ParamterizedCountryRepositoryServiceFallbackTest(
     }
 
     companion object {
+        /**
+         * Provides test parameters that combine different DAO and Service implementations:
+         * - FakeCountryDAO with StubCountryService (normal operation)
+         * - FakeCountryDAO with ThrowingServiceStub (service failure)
+         * - StubCountryDAO with StubCountryService (normal operation with stub DAO)
+         * - StubCountryDAO with ThrowingServiceStub (service failure with stub DAO)
+         */
         @JvmStatic
         @Parameterized.Parameters(name = "{index}: DAO={0}, Service={1}")
         fun data(): Collection<Array<Any>> {
