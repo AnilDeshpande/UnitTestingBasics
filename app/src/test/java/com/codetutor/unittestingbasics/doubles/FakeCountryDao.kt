@@ -11,6 +11,13 @@ class FakeCountryDao(
     override suspend fun getAll(): List<Country> {
         return backing
     }
+    override suspend fun insertAll(countries: List<Country>) {
+        backing.addAll(countries)
+    }
 
     suspend fun insert(country: Country) { backing += country } // test helper
+
+    fun clear() {
+        backing.clear()
+    }
 }
