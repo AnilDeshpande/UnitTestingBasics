@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt.android) // Using alias reference instead of direct id
 }
 
 android {
@@ -58,9 +58,9 @@ dependencies {
     androidTestImplementation("androidx.room:room-testing:$roomVersion")
     
     // Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
-    
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
     // Testing with coroutines
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
