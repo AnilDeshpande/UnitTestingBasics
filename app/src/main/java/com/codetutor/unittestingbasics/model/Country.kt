@@ -1,3 +1,13 @@
 package com.codetutor.unittestingbasics.model
 
-data class Country(val name: String, val driveSide: String)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "countries")
+data class Country(
+    @PrimaryKey val name: String,
+    @ColumnInfo(name = "drive_side") val driveSide: DriveSide
+)
+
+enum class DriveSide { LEFT, RIGHT }
