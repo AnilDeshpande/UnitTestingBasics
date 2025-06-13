@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "countries")
 data class Country(
     @PrimaryKey val name: String,
-    @ColumnInfo(name = "drive_side") val driveSide: String
+    @ColumnInfo(name = "drive_side") val driveSide: DriveSide
 )
 
 enum class DriveSide { LEFT, RIGHT }
