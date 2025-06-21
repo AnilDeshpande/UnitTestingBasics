@@ -1,12 +1,8 @@
 package com.codetutor.unittestingbasics.database
 
 import androidx.room.TypeConverter
-import com.codetutor.unittestingbasics.model.DriveSide
 
 class Converters {
-    @TypeConverter
-    fun fromSide(d: DriveSide) = d.name
-
-    @TypeConverter
-    fun toSide(s: String) = DriveSide.valueOf(s)
+    // We don't need type converters for simple string values
+    // If you want to add other type converters, you can add them here
 }
