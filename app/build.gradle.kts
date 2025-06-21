@@ -78,7 +78,8 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     androidTestImplementation("androidx.room:room-testing:$roomVersion")
-    
+    testImplementation("androidx.room:room-testing:$roomVersion")
+
     // Hilt dependencies
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -90,6 +91,12 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // Add these dependencies for local JVM tests
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.robolectric:robolectric:4.11.1")
 
     // Coroutines testing
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
