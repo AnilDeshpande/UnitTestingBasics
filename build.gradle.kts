@@ -2,4 +2,13 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.hilt.android) apply false
+}
+
+// Add the maven repository for Hilt
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
