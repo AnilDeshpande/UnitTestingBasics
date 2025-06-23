@@ -22,6 +22,10 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class CountryRoomDaoRobolectricTest {
 
+    /**
+     * Rule that forces Room to execute operations synchronously on the calling thread,
+     * removing the async behavior and making tests predictable.
+     */
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
