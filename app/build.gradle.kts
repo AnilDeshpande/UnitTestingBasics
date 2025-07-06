@@ -101,4 +101,8 @@ dependencies {
     // Coroutines testing
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    // MockK dependencies
+    testImplementation("io.mockk:mockk:1.13.8") // For local unit tests
+    androidTestImplementation("io.mockk:mockk-android:1.13.8") // For instrumented tests
 }
